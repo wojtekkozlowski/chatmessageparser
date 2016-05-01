@@ -13,17 +13,8 @@ import FutureKit
 
 class ParseriOSTests: XCTestCase {
     
-    private var tokenizer: Tokenizer!
-    
-    override func setUp() {
-        super.setUp()
-        self.tokenizer = Tokenizer()
-        tokenizer.addTokenDefinition("(?<=@)(\\w|\\d){1,}", type: .StringToken("mentions"))
-        tokenizer.addTokenDefinition("(?<=\\()\\w{1,15}(?=\\))", type: .StringToken("emoticons"))
-        tokenizer.addTokenDefinition("((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[\\-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9\\.\\-]+|(?:www\\.|[\\-;:&=\\+\\$,\\w]+@)[A-Za-z0-9\\.\\-]+)((?:\\/[\\+~%\\/\\.\\w\\-_]*)?\\??(?:[\\-\\+=&;%@\\.\\w_]*)#?(?:[\\.\\!\\/\\\\w]*))?)", type:.URLToken("links"))
-    }
-    
     func testFutures(){
+        let tokenizer = ContainerWrapper.sharedInstance.container.resolve(Tokenizer.self)!
         let tokensFuture = tokenizer.tokensFuture("@bob @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016")
 
         var mentions: [String]?
