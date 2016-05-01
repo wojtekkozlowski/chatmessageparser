@@ -27,7 +27,7 @@ class TokenJSONTransformer {
     }
     
     private func serializeDictioanry(object: [String:[AnyObject]]) -> String {
-        let data = try! NSJSONSerialization.dataWithJSONObject(object, options: PicoApplicationContext.sharedIntance.assembly.jsonSerializationOptions)
+        let data = try! NSJSONSerialization.dataWithJSONObject(object, options: [NSJSONWritingOptions.PrettyPrinted])
         let serialized =  NSString(data: data, encoding: NSUTF8StringEncoding)! as String
         return serialized.stringByReplacingOccurrencesOfString("\\/", withString: "/")
     }

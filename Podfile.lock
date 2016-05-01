@@ -3,17 +3,20 @@ PODS:
   - FutureKit (1.2.5)
   - Kanna (1.0.6)
   - Nimble (4.0.1)
+  - Swinject (1.1.1)
 
 DEPENDENCIES:
   - Alamofire
   - FutureKit
   - Kanna
   - Nimble
+  - Swinject
 
 SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   FutureKit: 48b6bb1c7a3c0a6059199202b2ceb0b84b0acf2b
   Kanna: 9f30945bbd293a609f698ea164687ccc0990ff60
   Nimble: 0f3c8b8b084cda391209c3c5efbb48bedeeb920a
+  Swinject: 8c1b46e49c604f8c5c1f45f92ef314d3736bbef4
 
 COCOAPODS: 0.39.0

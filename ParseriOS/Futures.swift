@@ -29,7 +29,7 @@ struct StringFutureToken: FutureToken {
 struct URLFutureToken: FutureToken {
     let text: String
     let name: String
-    private let networkService = PicoApplicationContext.sharedIntance.assembly.networkService
+    private let networkService = ContainerWrapper.sharedInstance.container.resolve(NetworkService.self)!
     
     func future() -> Future<Token> {
         let p = Promise<Token>()

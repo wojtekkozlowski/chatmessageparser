@@ -15,16 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var textInputField: UITextField!
     @IBOutlet weak var parseButton: UIButton!
     
-    private let parser: Parser
-    
-    required init?(coder aDecoder: NSCoder) {
-        let tokenizer = Tokenizer()
-        tokenizer.addTokenDefinition("(?<=@)(\\w|\\d){1,}", type: .StringToken("mentions"))
-        tokenizer.addTokenDefinition("(?<=\\()\\w{1,15}(?=\\))", type: .StringToken("emoticons"))
-        tokenizer.addTokenDefinition("((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[\\-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9\\.\\-]+|(?:www\\.|[\\-;:&=\\+\\$,\\w]+@)[A-Za-z0-9\\.\\-]+)((?:\\/[\\+~%\\/\\.\\w\\-_]*)?\\??(?:[\\-\\+=&;%@\\.\\w_]*)#?(?:[\\.\\!\\/\\\\w]*))?)", type:.URLToken("links"))
-         self.parser = Parser(tokenizer: tokenizer, transformer: TokenJSONTransformer())
-        super.init(coder: aDecoder)
-    }
+    var parser: Parser = ContainerWrapper.sharedInstance.container.resolve(Parser.self)!
     
     @IBAction func parsePressed(sender: AnyObject) {
         if let text = self.textInputField.text {

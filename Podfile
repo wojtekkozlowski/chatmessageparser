@@ -7,6 +7,7 @@ target 'ParseriOS' do
   pod 'Alamofire'
   pod 'FutureKit'
   pod 'Kanna'
+  pod 'Swinject'
 
 end
 

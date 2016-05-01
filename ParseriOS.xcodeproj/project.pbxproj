@@ -20,7 +20,7 @@
 		2EB92DF51CD3A21100314C90 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB92DF41CD3A21100314C90 /* Tokens.swift */; };
 		2EB92DF71CD3A37E00314C90 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB92DF61CD3A37E00314C90 /* Parser.swift */; };
 		2EB92DFA1CD4538B00314C90 /* FormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB92DF91CD4538B00314C90 /* FormatterFactory.swift */; };
-		2EB92DFD1CD4788C00314C90 /* PicoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB92DFC1CD4788C00314C90 /* PicoContainer.swift */; };
+		2EC9F96A1CD612C000A60765 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC9F9691CD612C000A60765 /* NetworkService.swift */; };
 		3F3377FA742E5DC64A08C81B /* Pods_ParseriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3769E125032408BF51151ED /* Pods_ParseriOS.framework */; };
 		E80179514647F3D40A37E40E /* Pods_ParseriOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FE166FDFADA061CDEE5E552 /* Pods_ParseriOSTests.framework */; };
 /* End PBXBuildFile section */
@@ -54,7 +54,7 @@
 		2EB92DF41CD3A21100314C90 /* Tokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		2EB92DF61CD3A37E00314C90 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		2EB92DF91CD4538B00314C90 /* FormatterFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterFactory.swift; sourceTree = "<group>"; };
-		2EB92DFC1CD4788C00314C90 /* PicoContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicoContainer.swift; sourceTree = "<group>"; };
+		2EC9F9691CD612C000A60765 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3BBC53BACF9742100E815B54 /* Pods-ParseriOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParseriOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParseriOS/Pods-ParseriOS.release.xcconfig"; sourceTree = "<group>"; };
 		61F28E4633BDC6027C6D3A42 /* Pods-ParseriOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParseriOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParseriOSTests/Pods-ParseriOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DA17B29C45E26BE17E5CE43D /* Pods-ParseriOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParseriOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParseriOS/Pods-ParseriOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -110,6 +110,7 @@
 				2EC9F9671CD4D9DD00A60765 /* Extensions */,
 				2EB92DFE1CD47EC900314C90 /* View */,
 				2E51EF261CD2331F00190342 /* Tokenizer.swift */,
+				2EC9F9691CD612C000A60765 /* NetworkService.swift */,
 				2EB92DF91CD4538B00314C90 /* FormatterFactory.swift */,
 				2EB92DF61CD3A37E00314C90 /* Parser.swift */,
 				2EB92DF01CD39F9A00314C90 /* TokenJSONTransformer.swift */,
@@ -139,7 +140,6 @@
 		2EB92DFF1CD47EE100314C90 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				2EB92DFC1CD4788C00314C90 /* PicoContainer.swift */,
 				2E51EF061CD2331200190342 /* AppDelegate.swift */,
 				2E51EF0D1CD2331200190342 /* Assets.xcassets */,
 				2E51EF121CD2331200190342 /* Info.plist */,
@@ -384,11 +384,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EC9F96A1CD612C000A60765 /* NetworkService.swift in Sources */,
 				2EB92DF31CD3A1D000314C90 /* Futures.swift in Sources */,
 				2E51EF091CD2331200190342 /* ViewController.swift in Sources */,
 				2E51EF071CD2331200190342 /* AppDelegate.swift in Sources */,
 				2EB92DEF1CD35F5700314C90 /* AsyncArrayExtension.swift in Sources */,
-				2EB92DFD1CD4788C00314C90 /* PicoContainer.swift in Sources */,
 				2EB92DF71CD3A37E00314C90 /* Parser.swift in Sources */,
 				2E51EF271CD2331F00190342 /* Tokenizer.swift in Sources */,
 				2EB92DF11CD39F9A00314C90 /* TokenJSONTransformer.swift in Sources */,

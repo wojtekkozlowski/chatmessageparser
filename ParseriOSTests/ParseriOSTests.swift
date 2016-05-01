@@ -17,7 +17,6 @@ class ParseriOSTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        PicoApplicationContext.sharedIntance.assembly = TestAssembly()
         self.tokenizer = Tokenizer()
         tokenizer.addTokenDefinition("(?<=@)(\\w|\\d){1,}", type: .StringToken("mentions"))
         tokenizer.addTokenDefinition("(?<=\\()\\w{1,15}(?=\\))", type: .StringToken("emoticons"))
