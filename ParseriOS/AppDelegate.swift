@@ -29,7 +29,7 @@ class ContainerWrapper {
         let container = Container()
         container.register(Parser.self) { _ in
             let tokenizer = Tokenizer()
-            tokenizer.addTokenDefinition("(?<=@)(\\w|\\d){1,}", type: .StringToken("mentions"))
+            tokenizer.addTokenDefinition("(?<=@)\\w{1,}", type: .StringToken("mentions"))
             tokenizer.addTokenDefinition("(?<=\\()\\w{1,15}(?=\\))", type: .StringToken("emoticons"))
             tokenizer.addTokenDefinition("((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[\\-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9\\.\\-]+|(?:www\\.|[\\-;:&=\\+\\$,\\w]+@)[A-Za-z0-9\\.\\-]+)((?:\\/[\\+~%\\/\\.\\w\\-_]*)?\\??(?:[\\-\\+=&;%@\\.\\w_]*)#?(?:[\\.\\!\\/\\\\w]*))?)", type:.URLToken("links"))
             return Parser(tokenizer: tokenizer, transformer: TokenJSONTransformer())
