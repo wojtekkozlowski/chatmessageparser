@@ -12,25 +12,24 @@ import PromiseKit
 @testable import ParseriOS
 
 class ParseriOSTests: XCTestCase {
-    
-    func testFutures(){
+
+    func testFutures() {
         let tokenizer = ContainerWrapper.sharedInstance.container.resolve(Tokenizer.self)!
         let tokensFuture = tokenizer.tokensFuture("@bob @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016")
 
         var mentions: [String]?
         var emoticons: [String]?
-        var links: [[String:String]]?
-        
-        tokensFuture.onSuccess { tokens  in
+        var links: [[String: String]]?
+
+        tokensFuture.onSuccess { tokens in
             let tokensDict = TokenJSONTransformer().transformTokensToDictionary(tokens)
             mentions = tokensDict["mentions"] as? [String]
             emoticons = tokensDict["emoticons"] as? [String]
-            links = tokensDict["links"] as? [[String:String]]
+            links = tokensDict["links"] as? [[String: String]]
         }
-        
+
         expect(mentions).toEventually(equal(["bob", "john"]))
         expect(emoticons).toEventually(equal(["success"]))
-        expect(links).toEventually(equal([["title": "Twitter / jdorfman: Sweet","url":"https://twitter.com/jdorfman/status/430511497475670016"]]))
+        expect(links).toEventually(equal([["title": "Twitter / jdorfman: Sweet", "url": "https://twitter.com/jdorfman/status/430511497475670016"]]))
     }
 }
-

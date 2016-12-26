@@ -12,8 +12,8 @@ import Alamofire
 import Kanna
 
 enum TokenType {
-    case stringToken (String)
-    case urlToken (String)
+    case stringToken(String)
+    case urlToken(String)
 }
 
 struct TokenDefinition {
@@ -23,7 +23,7 @@ struct TokenDefinition {
         switch type {
         case .stringToken(let name):
             return StringPromiseToken(text: text, name: name)
-        case .urlToken (let name):
+        case .urlToken(let name):
             return URLPromiseToken(text: text, name: name)
         }
     }
@@ -37,13 +37,13 @@ protocol URLTitleFormatter {
 struct StringPromiseToken: PromiseToken {
     let text: String
     let name: String
-    
+
     func promise() -> Promise<[String: Any]> {
         return Promise(value: self.toDictionary())
     }
-    
+
     private func toDictionary() -> [String: Any] {
-        return [self.name :text]
+        return [self.name: text]
     }
 }
 
@@ -51,7 +51,7 @@ struct URLPromiseToken: PromiseToken {
     let text: String
     let name: String
     private let networkService = ContainerWrapper.sharedInstance.container.resolve(NetworkService.self)!
-    
+
     func promise() -> Promise<[String: Any]> {
         return Promise<[String: Any]> { fulfill, reject in
             self.networkService.getURL(text) { (response, urlString) in
@@ -64,13 +64,12 @@ struct URLPromiseToken: PromiseToken {
             }
         }
     }
-    
+
     private func toDictionary(url: String, title: String?) -> [String: Any] {
         if let title = title {
-            return ["url":url, "title":title]
+            return ["url": url, "title": title]
         } else {
-            return ["url":url]
+            return ["url": url]
         }
     }
-    
 }

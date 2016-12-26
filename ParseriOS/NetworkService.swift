@@ -11,11 +11,11 @@ import Foundation
 import Alamofire
 
 protocol NetworkService {
-    func getURL(_ urlString: String, completion: @escaping (_ response:String?, _ urlString: String?) -> ())
+    func getURL(_ urlString: String, completion: @escaping (_ response: String?, _ urlString: String?) -> Void)
 }
 
 class AlamofireNetworkService: NetworkService {
-    func getURL(_ urlString: String, completion: @escaping (String?, String?) -> ()) {
+    func getURL(_ urlString: String, completion: @escaping (String?, String?) -> Void) {
         Alamofire.request(urlString).responseString { response in
             completion(response.result.value, response.request?.url?.absoluteString)
         }
@@ -23,8 +23,7 @@ class AlamofireNetworkService: NetworkService {
 }
 
 class TestDummyNetworkingService: NetworkService {
-    func getURL(_ urlString: String, completion: @escaping (_ response:String?, _ urlString: String?) -> ()) {
+    func getURL(_ urlString: String, completion: @escaping (_ response: String?, _ urlString: String?) -> Void) {
         completion("<html><body><div class=\"tweet-text\">Sweet</div>", urlString)
     }
 }
-

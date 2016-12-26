@@ -14,9 +14,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var textInputField: UITextField!
     @IBOutlet weak var parseButton: UIButton!
-    
+
     var parser: Parser = ContainerWrapper.sharedInstance.container.resolve(Parser.self)!
-    
+
     @IBAction func parsePressed(_ sender: AnyObject) {
         if let text = self.textInputField.text {
             self.parseButton.setTitleColor(UIColor.lightGray, for: UIControlState())
@@ -27,13 +27,10 @@ class ViewController: UIViewController {
             }.always {
                 self.parseButton.setTitleColor(self.parseButton.tintColor, for: .normal)
             }
-            
         }
     }
-    
+
     override func viewDidLoad() {
         self.textInputField.text = "@bob @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016"
-        
     }
 }
-

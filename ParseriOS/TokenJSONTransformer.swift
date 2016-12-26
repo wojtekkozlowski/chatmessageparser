@@ -9,27 +9,27 @@
 import Foundation
 
 class TokenJSONTransformer {
-    
+
     func serialize(_ tokens: [[String: Any]]) -> String {
         let dictionary = self.mergeTokens(tokens)
         return self.serialize(dictionary)
     }
-    
-    private func mergeTokens(_ tokens: [[String: Any]]) -> [String:Any] {
-        return tokens.reduce([String:[Any]]()) { (acc, element) in
+
+    private func mergeTokens(_ tokens: [[String: Any]]) -> [String: Any] {
+        return tokens.reduce([String: [Any]]()) { (acc, element) in
             var newAcc = acc
             if newAcc[element.keys.first!] == nil {
                 newAcc[element.keys.first!] = [Any]()
             }
             newAcc[element.keys.first!]!.append(contentsOf: element.values)
-            
+
             return newAcc
         }
     }
-    
-    private func serialize(_ object: [String:Any]) -> String {
+
+    private func serialize(_ object: [String: Any]) -> String {
         let data = try! JSONSerialization.data(withJSONObject: object, options: [JSONSerialization.WritingOptions.prettyPrinted])
-        let serialized =  NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+        let serialized = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
         return serialized.replacingOccurrences(of: "\\/", with: "/")
     }
 }
