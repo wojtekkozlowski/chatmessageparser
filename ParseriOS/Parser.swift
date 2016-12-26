@@ -7,20 +7,26 @@
 //
 
 import Foundation
-import FutureKit
+import PromiseKit
 
 class Parser {
-    private let tokenizer: Tokenizer
-    private let transformer: TokenJSONTransformer
+    fileprivate let tokenizer: Tokenizer
+    fileprivate let transformer: TokenJSONTransformer
+    
     init(tokenizer: Tokenizer, transformer: TokenJSONTransformer) {
         self.tokenizer = tokenizer
         self.transformer = transformer
     }
     
-    func parse(input:String) -> Future<String> {
-        let tokensFuture = self.tokenizer.tokensFuture(input)
-        return tokensFuture.onSuccess { tokens -> Future<String> in
-            return Future<String>(success: self.transformer.serialize(tokens))
+    func parse(_ input:String) -> Promise<String> {
+        let tokensPromise = self.tokenizer.tokensFuture(input)
+        return  tokensPromise.then { tokens in
+            return Promise(value: tokens)
+        }.then { tokens in
+            return self.transformer.serialize(tokens)
         }
+        //return a.then { tokens in
+        //    return self.transformer.serialize(tokens)
+        //}
     }
 }

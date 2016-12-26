@@ -8,52 +8,42 @@
 
 import Foundation
 import UIKit
-import FutureKit
+import PromiseKit
 import Alamofire
 
 protocol Token {
     var name: String { get }
-    func desc() -> AnyObject
+    func desc() -> Any
 }
 
 protocol FutureToken {
-    func future() -> Future<Token>
+    func promise() -> Promise<Token>
 }
 
 class Tokenizer {
     
-    private var tokenDefinitions:[TokenDefinition] = []
+    fileprivate var tokenDefinitions = [TokenDefinition]()
     
-    func addTokenDefinition(regexpString:String, type: TokenType){
+    func addTokenDefinition(_ regexpString:String, type: TokenType){
         let regexp = try! NSRegularExpression(pattern: regexpString, options: [])
         let tokenDefinition = TokenDefinition(regexp: regexp, type: type)
         self.tokenDefinitions.append(tokenDefinition)
     }
     
-    func tokensFuture(input:String) -> Future<[Token]> {
+    func tokensFuture(_ input:String) -> Promise<[Token]> {
         let futureTokens = self.createFutureTokens(input)
-        return self.tokensFuture(futureTokens)
+        return when(fulfilled: futureTokens.map { $0.promise() })
     }
     
-    private func createFutureTokens(input: String) -> [FutureToken] {
+    private func createFutureTokens(_ input: String) -> [FutureToken] {
         return self.tokenDefinitions.map { tokenDefinition -> [FutureToken] in
-            let matches = tokenDefinition.regexp.matchesInString(input, options: [], range: NSMakeRange(0, input.characters.count))
+            let matches = tokenDefinition.regexp.matches(in: input, options: [], range: NSMakeRange(0, input.characters.count))
             return matches.map { match -> FutureToken in
-                let tokenText = (input as NSString).substringWithRange(match.range)
+                let tokenText = (input as NSString).substring(with: match.range)
                 return tokenDefinition.token(tokenText)
                 
             }
         }.flatMap { $0 }
-    }
-    
-    private func tokensFuture(futureTokens:[FutureToken]) -> Future<[Token]> {
-        let p = Promise<[Token]>()
-        
-        futureTokens.map({ (item: FutureToken, callback) in
-            item.future().onSuccess(block: { callback($0) })
-        }) { p.completeWithSuccess($0) }
-        
-        return p.future
     }
     
 }

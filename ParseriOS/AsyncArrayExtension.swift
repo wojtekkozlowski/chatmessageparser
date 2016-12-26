@@ -9,27 +9,27 @@ import Foundation
 
 extension Array {
     // Convenience function which passes the global DISPATCH_QUEUE_PRIORITY_LOW queue as the transformQueue
-    public func map<U>(transform: (Element, U -> ()) -> (), withCompletionHandler completionHandler: [U] -> ()) {
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)
+    public func map<U>(_ transform: @escaping (Element, (U) -> ()) -> (), withCompletionHandler completionHandler: @escaping ([U]) -> ()) {
+        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.low)
         map(transform, onQueue: queue, withCompletionHandler: completionHandler)
     }
     
-    public func map<U>(transform: (Element, U -> ()) -> (), onQueue tranformQueue: dispatch_queue_t, withCompletionHandler completionHandler: [U] -> ()) {
-        let transformGroup = dispatch_group_create()
-        let dataSyncQueue = dispatch_queue_create("array.asyncMap.dataSync", DISPATCH_QUEUE_CONCURRENT)
-        var results: [U?] = [U?](count: count, repeatedValue: nil)
+    public func map<U>(_ transform: @escaping (Element, (U) -> ()) -> (), onQueue tranformQueue: DispatchQueue, withCompletionHandler completionHandler: @escaping ([U]) -> ()) {
+        let transformGroup = DispatchGroup()
+        let dataSyncQueue = DispatchQueue(label: "array.asyncMap.dataSync", attributes: DispatchQueue.Attributes.concurrent)
+        var results: [U?] = [U?](repeating: nil, count: count)
         
         // Nested function to dispatch the transform; mainly here to capture index from the for loop below
-        func performTransform(index: Int) {
+        func performTransform(_ index: Int) {
             let item = self[index]
-            dispatch_group_enter(transformGroup)
-            dispatch_async(tranformQueue) {
+            transformGroup.enter()
+            tranformQueue.async {
                 transform(item) {
                     result in
-                    dispatch_sync(dataSyncQueue) {
+                    dataSyncQueue.sync {
                         results[index] = result
                     }
-                    dispatch_group_leave(transformGroup)
+                    transformGroup.leave()
                 }
             }
         }
@@ -38,11 +38,11 @@ extension Array {
             performTransform(index)
         }
         
-        dispatch_group_notify(transformGroup, tranformQueue) {
+        transformGroup.notify(queue: tranformQueue) {
             var unwrappedResults: [U]? = nil
             
             // This dispatch_sync doesn't seem to be technically needed since all the transforms should have finished at this point
-            dispatch_sync(dataSyncQueue) {
+            dataSyncQueue.sync {
                 // Force unwrap the values in the results array
                 unwrappedResults = results.map({ item in item! })
             }

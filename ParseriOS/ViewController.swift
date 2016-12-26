@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import FutureKit
+import PromiseKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
@@ -17,14 +17,25 @@ class ViewController: UIViewController {
     
     var parser: Parser = ContainerWrapper.sharedInstance.container.resolve(Parser.self)!
     
-    @IBAction func parsePressed(sender: AnyObject) {
+    @IBAction func parsePressed(_ sender: AnyObject) {
         if let text = self.textInputField.text {
-            self.parseButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+            self.parseButton.setTitleColor(UIColor.lightGray, for: UIControlState())
             self.textView.text = nil
-            self.parser.parse(text).onSuccess {
-                self.parseButton.setTitleColor(self.parseButton.tintColor, forState: .Normal)
-                self.textView.text = $0
+            //self.parser.parse(text)
+            
+            //when(self.parser.parse(text)).then { text in
+            //    self.parseButton.setTitleColor(self.parseButton.tintColor, for: .normal)
+             //   self.textView.text = text
+            //}
+            _ = firstly {
+                self.parser.parse(text)
+            }.then { text in
+                //self.parseButton.setTitleColor(self.parseButton.tintColor, for: .normal)
+                self.textView.text = text
             }
+            /*self.parser.parse(text).onSuccess {
+             
+            }*/
         }
     }
     

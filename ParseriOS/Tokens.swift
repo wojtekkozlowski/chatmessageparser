@@ -9,18 +9,18 @@
 import Foundation
 
 enum TokenType {
-    case StringToken (String)
-    case URLToken (String)
+    case stringToken (String)
+    case urlToken (String)
 }
 
 struct TokenDefinition {
     let regexp: NSRegularExpression
     let type: TokenType
-    func token(text: String) -> FutureToken{
+    func token(_ text: String) -> FutureToken {
         switch type {
-        case .StringToken(let name):
+        case .stringToken(let name):
             return StringFutureToken(text: text, name: name)
-        case .URLToken (let name):
+        case .urlToken (let name):
             return URLFutureToken(text: text, name: name)
         }
     }
@@ -29,8 +29,8 @@ struct TokenDefinition {
 struct StringToken: Token {
     let text:String
     let name: String
-    func desc() -> AnyObject {
-        return text
+    func desc() -> Any {
+        return text as Any
     }
 }
 
@@ -39,7 +39,7 @@ struct URLToken: Token {
     let title: String?
     let name: String
     
-    func desc() -> AnyObject {
+    func desc() -> Any {
         if let title = self.title {
             return ["url":url, "title":title]
         } else {

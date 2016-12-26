@@ -10,26 +10,26 @@ import Foundation
 
 class TokenJSONTransformer {
     
-    func serialize(tokens: [Token]) -> String {
+    func serialize(_ tokens: [Token]) -> String {
         let dictionary = self.transformTokensToDictionary(tokens)
         return self.serializeDictioanry(dictionary)
     }
     
-    func transformTokensToDictionary(tokens: [Token]) -> [String:[AnyObject]] {
+    func transformTokensToDictionary(_ tokens: [Token]) -> [String:[AnyObject]] {
         return tokens.reduce([String:[AnyObject]]()) { (aggregate, element) in
             var newAggregate = aggregate
             if newAggregate[element.name] == nil {
                 newAggregate[element.name] = Array<AnyObject>()
             }
-            newAggregate[element.name]!.append(element.desc())
+            newAggregate[element.name]!.append(element.desc() as AnyObject)
             return newAggregate
         }
     }
     
-    private func serializeDictioanry(object: [String:[AnyObject]]) -> String {
-        let data = try! NSJSONSerialization.dataWithJSONObject(object, options: [NSJSONWritingOptions.PrettyPrinted])
-        let serialized =  NSString(data: data, encoding: NSUTF8StringEncoding)! as String
-        return serialized.stringByReplacingOccurrencesOfString("\\/", withString: "/")
+    fileprivate func serializeDictioanry(_ object: [String:[AnyObject]]) -> String {
+        let data = try! JSONSerialization.data(withJSONObject: object, options: [JSONSerialization.WritingOptions.prettyPrinted])
+        let serialized =  NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+        return serialized.replacingOccurrences(of: "\\/", with: "/")
     }
     
     
