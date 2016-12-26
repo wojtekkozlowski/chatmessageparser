@@ -6,6 +6,11 @@
 //  Copyright © 2016 Wojtek Kozlowski. All rights reserved.
 //
 
+/// TODO:
+/// 1. fix tests
+/// 2. fix email bug
+/// 3. fix readme
+
 import UIKit
 import Swinject
 
