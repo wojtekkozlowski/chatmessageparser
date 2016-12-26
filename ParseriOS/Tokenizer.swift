@@ -26,7 +26,7 @@ class Tokenizer {
     }
     
     func tokensFuture(_ input:String) -> Promise<[[String: Any]]> {
-        let tokenPromises = self.tokenDefinitions.map { tokenDefinition -> [Promise<[String: Any]>] in
+        let tokenDictionaryPromises = self.tokenDefinitions.map { tokenDefinition -> [Promise<[String: Any]>] in
             let matches = tokenDefinition.regexp.matches(in: input, options: [], range: NSMakeRange(0, input.characters.count))
             return matches.map { match -> Promise<[String: Any]> in
                 let tokenText = (input as NSString).substring(with: match.range)
@@ -34,7 +34,7 @@ class Tokenizer {
             }
             }.flatMap { $0 }
         
-        return when(fulfilled: tokenPromises)
+        return when(fulfilled: tokenDictionaryPromises)
     }
     
 }

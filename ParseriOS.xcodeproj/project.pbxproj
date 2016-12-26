@@ -17,9 +17,8 @@
 		2E51EF271CD2331F00190342 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E51EF261CD2331F00190342 /* Tokenizer.swift */; };
 		2EB92DF11CD39F9A00314C90 /* TokenJSONTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB92DF01CD39F9A00314C90 /* TokenJSONTransformer.swift */; };
 		2EB92DF31CD3A1D000314C90 /* PromisedTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB92DF21CD3A1D000314C90 /* PromisedTokens.swift */; };
-		2EB92DF51CD3A21100314C90 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB92DF41CD3A21100314C90 /* Tokens.swift */; };
 		2EB92DF71CD3A37E00314C90 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB92DF61CD3A37E00314C90 /* Parser.swift */; };
-		2EB92DFA1CD4538B00314C90 /* FormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB92DF91CD4538B00314C90 /* FormatterFactory.swift */; };
+		2EB92DFA1CD4538B00314C90 /* TitleFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB92DF91CD4538B00314C90 /* TitleFormatterFactory.swift */; };
 		2EC9F96A1CD612C000A60765 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC9F9691CD612C000A60765 /* NetworkService.swift */; };
 		6CEA9D9CECC37EA4200E1ECA /* Pods_ParseriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 405D5D65DFAB3242C3B80B63 /* Pods_ParseriOS.framework */; };
 /* End PBXBuildFile section */
@@ -49,9 +48,8 @@
 		2E51EF261CD2331F00190342 /* Tokenizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tokenizer.swift; sourceTree = "<group>"; };
 		2EB92DF01CD39F9A00314C90 /* TokenJSONTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenJSONTransformer.swift; sourceTree = "<group>"; };
 		2EB92DF21CD3A1D000314C90 /* PromisedTokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromisedTokens.swift; sourceTree = "<group>"; };
-		2EB92DF41CD3A21100314C90 /* Tokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		2EB92DF61CD3A37E00314C90 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
-		2EB92DF91CD4538B00314C90 /* FormatterFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterFactory.swift; sourceTree = "<group>"; };
+		2EB92DF91CD4538B00314C90 /* TitleFormatterFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleFormatterFactory.swift; sourceTree = "<group>"; };
 		2EC9F9691CD612C000A60765 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3C92D0F4389CCDED8BE7EC49 /* Pods_ParseriOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParseriOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		405D5D65DFAB3242C3B80B63 /* Pods_ParseriOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParseriOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,7 +106,7 @@
 				2EB92DFE1CD47EC900314C90 /* View */,
 				2E51EF261CD2331F00190342 /* Tokenizer.swift */,
 				2EC9F9691CD612C000A60765 /* NetworkService.swift */,
-				2EB92DF91CD4538B00314C90 /* FormatterFactory.swift */,
+				2EB92DF91CD4538B00314C90 /* TitleFormatterFactory.swift */,
 				2EB92DF61CD3A37E00314C90 /* Parser.swift */,
 				2EB92DF01CD39F9A00314C90 /* TokenJSONTransformer.swift */,
 			);
@@ -148,7 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				2EB92DF21CD3A1D000314C90 /* PromisedTokens.swift */,
-				2EB92DF41CD3A21100314C90 /* Tokens.swift */,
 			);
 			name = Tokens;
 			sourceTree = "<group>";
@@ -382,8 +379,7 @@
 				2EB92DF71CD3A37E00314C90 /* Parser.swift in Sources */,
 				2E51EF271CD2331F00190342 /* Tokenizer.swift in Sources */,
 				2EB92DF11CD39F9A00314C90 /* TokenJSONTransformer.swift in Sources */,
-				2EB92DF51CD3A21100314C90 /* Tokens.swift in Sources */,
-				2EB92DFA1CD4538B00314C90 /* FormatterFactory.swift in Sources */,
+				2EB92DFA1CD4538B00314C90 /* TitleFormatterFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

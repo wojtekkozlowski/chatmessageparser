@@ -10,8 +10,8 @@ import Foundation
 import PromiseKit
 
 class Parser {
-    fileprivate let tokenizer: Tokenizer
-    fileprivate let transformer: TokenJSONTransformer
+    private let tokenizer: Tokenizer
+    private let transformer: TokenJSONTransformer
     
     init(tokenizer: Tokenizer, transformer: TokenJSONTransformer) {
         self.tokenizer = tokenizer

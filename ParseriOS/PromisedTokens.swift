@@ -11,6 +11,24 @@ import PromiseKit
 import Alamofire
 import Kanna
 
+enum TokenType {
+    case stringToken (String)
+    case urlToken (String)
+}
+
+struct TokenDefinition {
+    let regexp: NSRegularExpression
+    let type: TokenType
+    func token(_ text: String) -> PromiseToken {
+        switch type {
+        case .stringToken(let name):
+            return StringPromiseToken(text: text, name: name)
+        case .urlToken (let name):
+            return URLPromiseToken(text: text, name: name)
+        }
+    }
+}
+
 protocol URLTitleFormatter {
     func format(_ doc: HTMLDocument, urlString: String?) -> String?
     func matches(_ urlString: String) -> Bool

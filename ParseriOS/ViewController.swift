@@ -21,21 +21,13 @@ class ViewController: UIViewController {
         if let text = self.textInputField.text {
             self.parseButton.setTitleColor(UIColor.lightGray, for: UIControlState())
             self.textView.text = nil
-            //self.parser.parse(text)
             
-            //when(self.parser.parse(text)).then { text in
-            //    self.parseButton.setTitleColor(self.parseButton.tintColor, for: .normal)
-             //   self.textView.text = text
-            //}
             _ = firstly {
                 self.parser.parse(text)
-            }.then { text in
+            }.then { tokensDictionary in
                 //self.parseButton.setTitleColor(self.parseButton.tintColor, for: .normal)
-                self.textView.text = text
+                self.textView.text = tokensDictionary.description
             }
-            /*self.parser.parse(text).onSuccess {
-             
-            }*/
         }
     }
     
