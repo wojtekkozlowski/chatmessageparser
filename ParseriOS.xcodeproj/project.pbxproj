@@ -47,7 +47,6 @@
 		2E51EF1B1CD2331300190342 /* ParseriOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseriOSTests.swift; sourceTree = "<group>"; };
 		2E51EF1D1CD2331300190342 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E51EF261CD2331F00190342 /* Tokenizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tokenizer.swift; sourceTree = "<group>"; };
-		2E63EB991E10C13B00718573 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		2EB92DF01CD39F9A00314C90 /* TokenJSONTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenJSONTransformer.swift; sourceTree = "<group>"; };
 		2EB92DF21CD3A1D000314C90 /* PromisedTokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromisedTokens.swift; sourceTree = "<group>"; };
 		2EB92DF41CD3A21100314C90 /* Tokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
@@ -112,7 +111,6 @@
 				2EB92DF91CD4538B00314C90 /* FormatterFactory.swift */,
 				2EB92DF61CD3A37E00314C90 /* Parser.swift */,
 				2EB92DF01CD39F9A00314C90 /* TokenJSONTransformer.swift */,
-				2E63EB991E10C13B00718573 /* MyPlayground.playground */,
 			);
 			path = ParseriOS;
 			sourceTree = "<group>";

@@ -8,7 +8,7 @@
 
 import XCTest
 import Nimble
-import FutureKit
+import PromiseKit
 @testable import ParseriOS
 
 class ParseriOSTests: XCTestCase {
