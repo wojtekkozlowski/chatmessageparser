@@ -31,10 +31,9 @@ class URLTitleFormatterFactory {
     }
 }
 
-
 class TwitterURLTitleFormatter: URLTitleFormatter {
     
-    fileprivate let regexpString:String = "(?<=\\/www\\.|\\/)twitter\\.com"
+    private let regexpString:String = "(?<=\\/www\\.|\\/)twitter\\.com"
     
     lazy var regExp: NSRegularExpression =  {
         return try! NSRegularExpression(pattern: self.regexpString, options: [])
@@ -50,17 +49,15 @@ class TwitterURLTitleFormatter: URLTitleFormatter {
         return "Twitter / \(twitterHandle) \(tweetText)"
     }
     
-    fileprivate func tweetText(_ doc: HTMLDocument) -> String? {
-        
-        //return doc.xpath("//*[contains(@class, 'tweet-text')]").first?.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        return "tweet!"
+    private func tweetText(_ doc: HTMLDocument) -> String? {
+        return doc.xpath("//*[contains(@class, 'tweet-text')]").first?.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
     
-    fileprivate func formattedTweet(_ doc:HTMLDocument) -> String {
+    private func formattedTweet(_ doc:HTMLDocument) -> String {
         return self.tweetText(doc) ?? ""
     }
     
-    fileprivate func twitterHandle(_ urlString:String?) -> String? {
+    private func twitterHandle(_ urlString:String?) -> String? {
         return urlString.flatMap { string in
             let handleRegExp = try? NSRegularExpression(pattern: "(?<=twitter\\.com\\/)\\w*", options: [])
             return handleRegExp.flatMap { regex in
@@ -70,14 +67,13 @@ class TwitterURLTitleFormatter: URLTitleFormatter {
         }
     }
     
-    fileprivate func formatterTwitterHandle(_ urlString:String?) -> String {
+    private func formatterTwitterHandle(_ urlString:String?) -> String {
         if let handle = self.twitterHandle(urlString) {
             return "\(handle):"
         } else {
             return ""
         }
     }
-
 }
 
 class PlainURLTitleFormatter: URLTitleFormatter {

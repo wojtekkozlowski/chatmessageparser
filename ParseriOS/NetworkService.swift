@@ -16,21 +16,10 @@ protocol NetworkService {
 
 class AlamofireNetworkService: NetworkService {
     func getURL(_ urlString: String, completion: @escaping (String?, String?) -> ()) {
-        //Alamofire.request(.GET, urlString, parameters: nil).responseString { response in
-        //    completion(response: response.result.value, urlString: response.request?.URLString)
-        //}
-        
         Alamofire.request(urlString).responseString { response in
             completion(response.result.value, response.request?.url?.absoluteString)
         }
-        
     }
-
-    //func getURL(_ urlString: String, completion: @escaping (_ response:String?, _ urlString: String?) -> ()){
-    //    Alamofire.request(.GET, urlString, parameters: nil).responseString { response in
-    //        completion(response: response.result.value, urlString: response.request?.URLString)
-    //    }
-    //}
 }
 
 class TestDummyNetworkingService: NetworkService {

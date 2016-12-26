@@ -13,7 +13,7 @@ import Alamofire
 
 protocol Token {
     var name: String { get }
-    func desc() -> Any
+    var desc: Any { get }
 }
 
 protocol FutureToken {
@@ -22,7 +22,7 @@ protocol FutureToken {
 
 class Tokenizer {
     
-    fileprivate var tokenDefinitions = [TokenDefinition]()
+    private var tokenDefinitions = [TokenDefinition]()
     
     func addTokenDefinition(_ regexpString:String, type: TokenType){
         let regexp = try! NSRegularExpression(pattern: regexpString, options: [])
@@ -31,19 +31,15 @@ class Tokenizer {
     }
     
     func tokensFuture(_ input:String) -> Promise<[Token]> {
-        let futureTokens = self.createFutureTokens(input)
-        return when(fulfilled: futureTokens.map { $0.promise() })
-    }
-    
-    private func createFutureTokens(_ input: String) -> [FutureToken] {
-        return self.tokenDefinitions.map { tokenDefinition -> [FutureToken] in
+        let tokenPromises = self.tokenDefinitions.map { tokenDefinition -> [Promise<Token>] in
             let matches = tokenDefinition.regexp.matches(in: input, options: [], range: NSMakeRange(0, input.characters.count))
-            return matches.map { match -> FutureToken in
+            return matches.map { match -> Promise<Token> in
                 let tokenText = (input as NSString).substring(with: match.range)
-                return tokenDefinition.token(tokenText)
-                
+                return tokenDefinition.token(tokenText).promise()
             }
-        }.flatMap { $0 }
+            }.flatMap { $0 }
+        
+        return when(fulfilled: tokenPromises)
     }
     
 }

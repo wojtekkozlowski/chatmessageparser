@@ -15,18 +15,18 @@ class TokenJSONTransformer {
         return self.serializeDictioanry(dictionary)
     }
     
-    func transformTokensToDictionary(_ tokens: [Token]) -> [String:[AnyObject]] {
-        return tokens.reduce([String:[AnyObject]]()) { (aggregate, element) in
-            var newAggregate = aggregate
-            if newAggregate[element.name] == nil {
-                newAggregate[element.name] = Array<AnyObject>()
+    func transformTokensToDictionary(_ tokens: [Token]) -> [String:[Any]] {
+        return tokens.reduce([String:[Any]]()) { (acc, element) in
+            var newAcc = acc
+            if newAcc[element.name] == nil {
+                newAcc[element.name] = [Any]()
             }
-            newAggregate[element.name]!.append(element.desc() as AnyObject)
-            return newAggregate
+            newAcc[element.name]!.append(element.desc)
+            return newAcc
         }
     }
     
-    fileprivate func serializeDictioanry(_ object: [String:[AnyObject]]) -> String {
+    fileprivate func serializeDictioanry(_ object: [String:[Any]]) -> String {
         let data = try! JSONSerialization.data(withJSONObject: object, options: [JSONSerialization.WritingOptions.prettyPrinted])
         let serialized =  NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
         return serialized.replacingOccurrences(of: "\\/", with: "/")

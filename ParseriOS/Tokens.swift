@@ -29,7 +29,7 @@ struct TokenDefinition {
 struct StringToken: Token {
     let text:String
     let name: String
-    func desc() -> Any {
+    var desc: Any {
         return text as Any
     }
 }
@@ -39,7 +39,7 @@ struct URLToken: Token {
     let title: String?
     let name: String
     
-    func desc() -> Any {
+    var desc: Any {
         if let title = self.title {
             return ["url":url, "title":title]
         } else {
