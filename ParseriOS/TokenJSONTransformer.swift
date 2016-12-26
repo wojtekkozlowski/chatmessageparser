@@ -10,23 +10,24 @@ import Foundation
 
 class TokenJSONTransformer {
     
-    func serialize(_ tokens: [Token]) -> String {
+    func serialize(_ tokens: [[String: Any]]) -> String {
         let dictionary = self.transformTokensToDictionary(tokens)
         return self.serializeDictioanry(dictionary)
     }
     
-    func transformTokensToDictionary(_ tokens: [Token]) -> [String:[Any]] {
+    func transformTokensToDictionary(_ tokens: [[String: Any]]) -> [String:Any] {
         return tokens.reduce([String:[Any]]()) { (acc, element) in
             var newAcc = acc
-            if newAcc[element.name] == nil {
-                newAcc[element.name] = [Any]()
+            if newAcc[element.keys.first!] == nil {
+                newAcc[element.keys.first!] = [Any]()
             }
-            newAcc[element.name]!.append(element.desc)
+            newAcc[element.keys.first!]!.append(contentsOf: element.values)
+            
             return newAcc
         }
     }
     
-    fileprivate func serializeDictioanry(_ object: [String:[Any]]) -> String {
+    fileprivate func serializeDictioanry(_ object: [String:Any]) -> String {
         let data = try! JSONSerialization.data(withJSONObject: object, options: [JSONSerialization.WritingOptions.prettyPrinted])
         let serialized =  NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
         return serialized.replacingOccurrences(of: "\\/", with: "/")

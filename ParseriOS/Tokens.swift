@@ -16,34 +16,14 @@ enum TokenType {
 struct TokenDefinition {
     let regexp: NSRegularExpression
     let type: TokenType
-    func token(_ text: String) -> FutureToken {
+    func token(_ text: String) -> PromiseToken {
         switch type {
         case .stringToken(let name):
-            return StringFutureToken(text: text, name: name)
+            return StringPromiseToken(text: text, name: name)
         case .urlToken (let name):
-            return URLFutureToken(text: text, name: name)
+            return URLPromiseToken(text: text, name: name)
         }
     }
 }
 
-struct StringToken: Token {
-    let text:String
-    let name: String
-    var desc: Any {
-        return text as Any
-    }
-}
 
-struct URLToken: Token {
-    let url:String
-    let title: String?
-    let name: String
-    
-    var desc: Any {
-        if let title = self.title {
-            return ["url":url, "title":title]
-        } else {
-            return ["url":url]
-        }
-    }
-}

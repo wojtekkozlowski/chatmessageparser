@@ -11,13 +11,8 @@ import UIKit
 import PromiseKit
 import Alamofire
 
-protocol Token {
-    var name: String { get }
-    var desc: Any { get }
-}
-
-protocol FutureToken {
-    func promise() -> Promise<Token>
+protocol PromiseToken {
+    func promise() -> Promise<[String: Any]>
 }
 
 class Tokenizer {
@@ -30,10 +25,10 @@ class Tokenizer {
         self.tokenDefinitions.append(tokenDefinition)
     }
     
-    func tokensFuture(_ input:String) -> Promise<[Token]> {
-        let tokenPromises = self.tokenDefinitions.map { tokenDefinition -> [Promise<Token>] in
+    func tokensFuture(_ input:String) -> Promise<[[String: Any]]> {
+        let tokenPromises = self.tokenDefinitions.map { tokenDefinition -> [Promise<[String: Any]>] in
             let matches = tokenDefinition.regexp.matches(in: input, options: [], range: NSMakeRange(0, input.characters.count))
-            return matches.map { match -> Promise<Token> in
+            return matches.map { match -> Promise<[String: Any]> in
                 let tokenText = (input as NSString).substring(with: match.range)
                 return tokenDefinition.token(tokenText).promise()
             }

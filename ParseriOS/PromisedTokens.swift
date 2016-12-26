@@ -16,30 +16,43 @@ protocol URLTitleFormatter {
     func matches(_ urlString: String) -> Bool
 }
 
-struct StringFutureToken: FutureToken {
+struct StringPromiseToken: PromiseToken {
     let text: String
     let name: String
-    func promise() -> Promise<Token> {
-        return Promise(value: StringToken(text: text, name: name))
+    
+    func promise() -> Promise<[String: Any]> {
+        return Promise(value: self.toDictionary())
+    }
+    
+    private func toDictionary() -> [String: Any] {
+        return [self.name :text]
     }
 }
 
-struct URLFutureToken: FutureToken {
+struct URLPromiseToken: PromiseToken {
     let text: String
     let name: String
     private let networkService = ContainerWrapper.sharedInstance.container.resolve(NetworkService.self)!
     
-    func promise() -> Promise<Token> {
-        return Promise<Token> { fulfill, reject in
+    func promise() -> Promise<[String: Any]> {
+        return Promise<[String: Any]> { fulfill, reject in
             self.networkService.getURL(text) { (response, urlString) in
                 let title = response.flatMap { value in
                     Kanna.HTML(html: value, encoding: String.Encoding.utf8).flatMap { doc in
                         URLTitleFormatterFactory.sharedInstance.formatterForURL(urlString).format(doc, urlString: urlString).map { $0 }
                     }
                 }
-                let urlToken = URLToken(url: self.text, title: title, name: self.name)
-                fulfill(urlToken)
+                fulfill(self.toDictionary(url: self.text, title: title))
             }
         }
     }
+    
+    private func toDictionary(url: String, title: String?) -> [String: Any] {
+        if let title = title {
+            return ["url":url, "title":title]
+        } else {
+            return ["url":url]
+        }
+    }
+    
 }
