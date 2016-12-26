@@ -10,12 +10,12 @@ import Foundation
 
 class TokenJSONTransformer {
 
-    func serialize(_ tokens: [[String: Any]]) -> String {
+    func serialize(_ tokens: [TokenDictionary]) -> String {
         let dictionary = self.mergeTokens(tokens)
         return self.serialize(dictionary)
     }
 
-    private func mergeTokens(_ tokens: [[String: Any]]) -> [String: Any] {
+    private func mergeTokens(_ tokens: [TokenDictionary]) -> TokenDictionary {
         return tokens.reduce([String: [Any]]()) { (acc, element) in
             var newAcc = acc
             if newAcc[element.keys.first!] == nil {
@@ -27,7 +27,7 @@ class TokenJSONTransformer {
         }
     }
 
-    private func serialize(_ object: [String: Any]) -> String {
+    private func serialize(_ object: TokenDictionary) -> String {
         let data = try! JSONSerialization.data(withJSONObject: object, options: [JSONSerialization.WritingOptions.prettyPrinted])
         let serialized = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
         return serialized.replacingOccurrences(of: "\\/", with: "/")

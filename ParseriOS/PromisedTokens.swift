@@ -38,11 +38,11 @@ struct StringPromiseToken: PromiseToken {
     let text: String
     let name: String
 
-    func promise() -> Promise<[String: Any]> {
+    func promise() -> Promise<TokenDictionary> {
         return Promise(value: self.toDictionary())
     }
 
-    private func toDictionary() -> [String: Any] {
+    private func toDictionary() -> TokenDictionary {
         return [self.name: text]
     }
 }
@@ -52,8 +52,8 @@ struct URLPromiseToken: PromiseToken {
     let name: String
     private let networkService = ContainerWrapper.sharedInstance.container.resolve(NetworkService.self)!
 
-    func promise() -> Promise<[String: Any]> {
-        return Promise<[String: Any]> { fulfill, reject in
+    func promise() -> Promise<TokenDictionary> {
+        return Promise<TokenDictionary> { fulfill, reject in
             self.networkService.getURL(text) { (response, urlString) in
                 let title = response.flatMap { value in
                     Kanna.HTML(html: value, encoding: String.Encoding.utf8).flatMap { doc in
@@ -65,7 +65,7 @@ struct URLPromiseToken: PromiseToken {
         }
     }
 
-    private func toDictionary(url: String, title: String?) -> [String: Any] {
+    private func toDictionary(url: String, title: String?) -> TokenDictionary {
         if let title = title {
             return ["url": url, "title": title]
         } else {
