@@ -41,3 +41,6 @@ result should be:
   ]
 }
 ```
+### Design choices ###
+* Dependency Inversion for testability
+* Promises for declarative async
