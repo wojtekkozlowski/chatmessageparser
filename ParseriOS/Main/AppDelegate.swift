@@ -19,8 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     static var container: Container = {
         let container = Container()
+        
         container.register(Parser.self) { c in
-            return Parser(tokenizer: c.resolve(Tokenizer.self)!, transformer: TokenJSONTransformer())
+            return Parser(tokenizer: c.resolve(Tokenizer.self)!)
         }
         
         container.register(Tokenizer.self) { _ in

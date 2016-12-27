@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var textInputField: UITextField!
     @IBOutlet weak var parseButton: UIButton!
 
-    var parser: Parser!// = ContainerWrapper.sharedInstance.container.resolve(Parser.self)!
+    var parser = AppDelegate.self.container.resolve(Parser.self)!
 
     @IBAction func parsePressed(_ sender: AnyObject) {
         if let text = self.textInputField.text {
@@ -31,6 +31,6 @@ class ViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        self.textInputField.text = "@bob @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016"
+        self.textInputField.text = "@bob (awesome) @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016 https://example.com/"
     }
 }

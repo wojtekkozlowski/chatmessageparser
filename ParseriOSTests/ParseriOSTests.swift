@@ -14,25 +14,24 @@ import Nimble
 
 class ParseriOSTests: XCTestCase {
     
-    func testFutures() {
+    func testParsing() {
         AppDelegate.self.container.register(NetworkService.self) { _ in
             let response = (urlString: "https://twitter.com/jdorfman/status/430511497475670016",
                             responseString: "<html><body><div class=\"tweet-text\">Sweet</div>")
             return StubNetworkingService(responseTuples: [response])
         }
         let tokenizer = AppDelegate.self.container.resolve(Tokenizer.self)!
-        let tokensFuture = tokenizer.tokensPromise("@bob (awesome) @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016 https://example.com/")
+        let tokensPromise = tokenizer.tokensPromise("@bob (awesome) @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016 https://example.com/")
         
         var mentions: [String]!
         var emoticons: [String]!
         var links: [[String: String]]!
         
-        _ = tokensFuture.then { tokens -> Void in
-            let tokensDict = TokenJSONTransformer().mergeTokens(tokens)
+        _ = tokensPromise.then { tokens -> Void in
+            let tokensDict = tokenizer.mergeTokenDictionaries(tokens)
             mentions = tokensDict["mentions"] as? [String]
             emoticons = tokensDict["emoticons"] as? [String]
             links = tokensDict["links"] as? [[String: String]]
-            print(tokensDict.serialize())
         }
         
         expect(mentions).toEventually(equal(["bob", "john"]))

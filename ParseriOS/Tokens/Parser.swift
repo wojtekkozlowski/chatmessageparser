@@ -11,16 +11,14 @@ import PromiseKit
 
 class Parser {
     private let tokenizer: Tokenizer
-    private let transformer: TokenJSONTransformer
 
-    init(tokenizer: Tokenizer, transformer: TokenJSONTransformer) {
+    init(tokenizer: Tokenizer) {
         self.tokenizer = tokenizer
-        self.transformer = transformer
     }
 
     func parse(_ input: String) -> Promise<String> {
-        return self.tokenizer.tokensPromise(input).then { tokens in
-            return self.transformer.serialize(tokens)
+        return self.tokenizer.tokensPromise(input).then { tokenDictionaries in
+            return self.tokenizer.mergeTokenDictionaries(tokenDictionaries).serialize()
         }
     }
 }
