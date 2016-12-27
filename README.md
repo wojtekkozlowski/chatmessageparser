@@ -1,6 +1,7 @@
 # README #
 
-This solution parses a chat message string and returns a JSON string containing information about its contents.
+### What is it? ###
+This solution parses a chat message string and returns a JSON containing information about its contents.
 
 1. @mentions
 2. Emoticons (and word between round brackets)
@@ -15,7 +16,7 @@ This solution parses a chat message string and returns a JSON string containing 
 ### Example ###
 for input:
 ```
-"@bob (awesome) @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016"
+"@bob (awesome) @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016 https://example.com/"
 ```
 
 result should be:
@@ -33,6 +34,9 @@ result should be:
     {
       "url" : "https://twitter.com/jdorfman/status/430511497475670016",
       "title" : "Twitter / jdorfman: Sweet"
+    },
+    {
+      "url" : "https://example.com/"
     }
   ]
 }
