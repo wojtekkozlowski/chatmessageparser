@@ -7,9 +7,7 @@
 //
 
 /// TODO:
-/// 1. fix tests
-/// 2. fix email bug
-/// 3. fix readme
+/// 1. fix email bug
 
 import UIKit
 import Swinject
