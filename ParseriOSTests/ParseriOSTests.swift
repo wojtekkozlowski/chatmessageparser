@@ -21,7 +21,7 @@ class ParseriOSTests: XCTestCase {
             return StubNetworkingService(responseTuples: [response])
         }
         let tokenizer = AppDelegate.self.container.resolve(Tokenizer.self)!
-        let tokensFuture = tokenizer.tokensPromise("@bob (awesome) @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016")
+        let tokensFuture = tokenizer.tokensPromise("@bob (awesome) @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016 https://example.com/")
         
         var mentions: [String]!
         var emoticons: [String]!
@@ -32,12 +32,14 @@ class ParseriOSTests: XCTestCase {
             mentions = tokensDict["mentions"] as? [String]
             emoticons = tokensDict["emoticons"] as? [String]
             links = tokensDict["links"] as? [[String: String]]
+            print(tokensDict.serialize())
         }
         
         expect(mentions).toEventually(equal(["bob", "john"]))
         expect(emoticons).toEventually(equal(["awesome", "success"]))
+        expect(links.count).to(equal(2))
         expect(links[0]).toEventually(equal(["title": "Twitter / jdorfman: Sweet", "url": "https://twitter.com/jdorfman/status/430511497475670016"]))
-        
+        expect(links[1]).toEventually(equal(["url": "https://example.com/"]))
     }
 }
 
