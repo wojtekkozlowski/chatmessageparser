@@ -82,9 +82,9 @@
 		2E51EEFA1CD2331200190342 = {
 			isa = PBXGroup;
 			children = (
-				2E9D73F91E11F76300A4D3E1 /* ParseriOSTests */,
 				A63EC8C8847C394B1E590691 /* Frameworks */,
 				2E51EF051CD2331200190342 /* ParseriOS */,
+				2E9D73F91E11F76300A4D3E1 /* ParseriOSTests */,
 				ED384FA17D598339E96392E1 /* Pods */,
 				2E51EF041CD2331200190342 /* Products */,
 			);
@@ -114,8 +114,8 @@
 		2E9D73F91E11F76300A4D3E1 /* ParseriOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				2E9D73FA1E11F76300A4D3E1 /* ParseriOSTests.swift */,
 				2E9D73FC1E11F76300A4D3E1 /* Info.plist */,
+				2E9D73FA1E11F76300A4D3E1 /* ParseriOSTests.swift */,
 			);
 			path = ParseriOSTests;
 			sourceTree = "<group>";

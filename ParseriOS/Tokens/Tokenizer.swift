@@ -26,7 +26,7 @@ class Tokenizer {
         let tokenDefinition = TokenDefinition(regexp: regexp, type: type)
         self.tokenDefinitions.append(tokenDefinition)
     }
-    
+
     func tokensPromise(_ input: String) -> Promise<[TokenDictionary]> {
         let tokenDictionaryPromises = self.tokenDefinitions.map { tokenDefinition -> [Promise<TokenDictionary>] in
             let matches = tokenDefinition.regexp.matches(in: input, options: [], range: NSMakeRange(0, input.characters.count))
@@ -38,18 +38,17 @@ class Tokenizer {
 
         return when(fulfilled: tokenDictionaryPromises)
     }
-    
-    
+
     func mergeTokenDictionaries(_ tokens: [TokenDictionary]) -> TokenDictionary {
         return tokens.reduce([String: [Any]]()) { (acc, element) in
             var newAcc = acc
             let elementKey = element.keys.first!
-            
+
             if newAcc[elementKey] == nil {
                 newAcc[elementKey] = [Any]()
             }
             newAcc[elementKey]!.append(contentsOf: element.values)
-            
+
             return newAcc
         }
     }
