@@ -1,5 +1,3 @@
-# README #
-
 ### What is it? ###
 This solution parses a chat message string and returns a JSON containing information about its contents.
 
