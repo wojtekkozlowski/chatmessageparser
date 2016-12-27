@@ -20,6 +20,7 @@ DEPENDENCIES:
   - Kanna
   - Nimble
   - PromiseKit
+  - Swinject
   - Swinject (= 2.0.0-beta.3)
 
 SPEC CHECKSUMS:
@@ -29,6 +30,6 @@ SPEC CHECKSUMS:
   PromiseKit: c98453ff78544c0ad5bb0ea980782e6875f47978
   Swinject: a94dd23e05c7b557e53ee4e0f795f15cba19c7df
 
-PODFILE CHECKSUM: e2714de26f5421606aae72728ddebd8e07106685
+PODFILE CHECKSUM: 888523de829ea4eb26e17075f4669acefb3fe9ad
 
 COCOAPODS: 1.1.1

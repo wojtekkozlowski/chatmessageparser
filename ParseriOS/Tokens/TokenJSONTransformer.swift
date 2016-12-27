@@ -15,13 +15,15 @@ class TokenJSONTransformer {
         return self.serialize(dictionary)
     }
 
-    private func mergeTokens(_ tokens: [TokenDictionary]) -> TokenDictionary {
+    func mergeTokens(_ tokens: [TokenDictionary]) -> TokenDictionary {
         return tokens.reduce([String: [Any]]()) { (acc, element) in
             var newAcc = acc
-            if newAcc[element.keys.first!] == nil {
-                newAcc[element.keys.first!] = [Any]()
+            let elementKey = element.keys.first!
+            
+            if newAcc[elementKey] == nil {
+                newAcc[elementKey] = [Any]()
             }
-            newAcc[element.keys.first!]!.append(contentsOf: element.values)
+            newAcc[elementKey]!.append(contentsOf: element.values)
 
             return newAcc
         }
@@ -29,6 +31,14 @@ class TokenJSONTransformer {
 
     private func serialize(_ object: TokenDictionary) -> String {
         let data = try! JSONSerialization.data(withJSONObject: object, options: [JSONSerialization.WritingOptions.prettyPrinted])
+        let serialized = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+        return serialized.replacingOccurrences(of: "\\/", with: "/")
+    }
+}
+
+extension Dictionary {
+    func serialize() -> String {
+        let data = try! JSONSerialization.data(withJSONObject: self, options: [JSONSerialization.WritingOptions.prettyPrinted])
         let serialized = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
         return serialized.replacingOccurrences(of: "\\/", with: "/")
     }

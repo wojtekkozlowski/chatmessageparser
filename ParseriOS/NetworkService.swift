@@ -21,9 +21,3 @@ class AlamofireNetworkService: NetworkService {
         }
     }
 }
-
-class TestDummyNetworkingService: NetworkService {
-    func getURL(_ urlString: String, completion: @escaping (_ response: String?, _ urlString: String?) -> Void) {
-        completion("<html><body><div class=\"tweet-text\">Sweet</div>", urlString)
-    }
-}

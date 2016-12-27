@@ -50,7 +50,7 @@ struct StringPromiseToken: PromiseToken {
 struct URLPromiseToken: PromiseToken {
     let text: String
     let name: String
-    private let networkService = ContainerWrapper.sharedInstance.container.resolve(NetworkService.self)!
+    private let networkService = AppDelegate.self.container.resolve(NetworkService.self)!
 
     func promise() -> Promise<TokenDictionary> {
         return Promise<TokenDictionary> { fulfill, reject in
@@ -67,9 +67,9 @@ struct URLPromiseToken: PromiseToken {
 
     private func toDictionary(url: String, title: String?) -> TokenDictionary {
         if let title = title {
-            return ["url": url, "title": title]
+            return [self.name: ["url": url, "title": title]]
         } else {
-            return ["url": url]
+            return [self.name: ["url": url]]
         }
     }
 }

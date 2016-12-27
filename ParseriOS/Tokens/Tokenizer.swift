@@ -27,7 +27,7 @@ class Tokenizer {
         self.tokenDefinitions.append(tokenDefinition)
     }
 
-    func tokensFuture(_ input: String) -> Promise<[TokenDictionary]> {
+    func tokensPromise(_ input: String) -> Promise<[TokenDictionary]> {
         let tokenDictionaryPromises = self.tokenDefinitions.map { tokenDefinition -> [Promise<TokenDictionary>] in
             let matches = tokenDefinition.regexp.matches(in: input, options: [], range: NSMakeRange(0, input.characters.count))
             return matches.map { match -> Promise<TokenDictionary> in

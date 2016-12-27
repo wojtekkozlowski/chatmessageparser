@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var textInputField: UITextField!
     @IBOutlet weak var parseButton: UIButton!
 
-    var parser: Parser = ContainerWrapper.sharedInstance.container.resolve(Parser.self)!
+    var parser: Parser!// = ContainerWrapper.sharedInstance.container.resolve(Parser.self)!
 
     @IBAction func parsePressed(_ sender: AnyObject) {
         if let text = self.textInputField.text {

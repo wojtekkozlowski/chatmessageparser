@@ -19,7 +19,7 @@ class Parser {
     }
 
     func parse(_ input: String) -> Promise<String> {
-        return self.tokenizer.tokensFuture(input).then { tokens in
+        return self.tokenizer.tokensPromise(input).then { tokens in
             return self.transformer.serialize(tokens)
         }
     }

@@ -8,11 +8,12 @@ target 'ParseriOS' do
   pod 'PromiseKit'
   pod 'Kanna'
   pod 'Swinject','2.0.0-beta.3'
-
 end
 
 target 'ParseriOSTests' do
+  pod 'Swinject'
   pod 'PromiseKit'
+  pod 'Kanna'
   pod 'Nimble'
 end
 
